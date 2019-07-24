@@ -1,3 +1,0 @@
-(executable (name EsyInvertedCtypesStubsApp)
-    (public_name EsyInvertedCtypesStubsApp.exe)
-    (libraries esy-inverted-ctypes-stubs.library)) 

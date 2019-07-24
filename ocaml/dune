@@ -1,0 +1,2 @@
+(library (name EsyInvertedCtypesStubsLibrary) 
+         (public_name esy-inverted-ctypes-stubs.library))

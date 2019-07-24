@@ -1,0 +1,2 @@
+* Stubgen
+  Needs an ml file that will create stubs. This file will use Ctypes to do so

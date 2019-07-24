@@ -1,0 +1,29 @@
+(rule (targets mylib.c mylib.h mylib_generated_bindings.ml) 
+      (deps ../stubgen/Gen.exe) 
+      (action (run %{deps})))
+
+(rule (targets dllcaml_mylib_stubs.so) 
+      (deps   foo.o bar.o) 
+      (action (run %{cc} -shared -o %{targets} %{deps})))
+
+(rule (targets libcaml_mylib_stubs.a) 
+      (deps mylib.o) 
+      (action (run ar rcs %{targets} %{deps})))
+
+(rule (targets mylib.o) 
+      (deps 
+       (:c mylib.c)
+       mylib.h) 
+      (action (run %{cc} -I. -c %{c})))
+
+(library (name caml_mylib) 
+         (modules ApplyMyLibBindings) 
+         (libraries ctypes ctypes.foreign) 
+         (self_build_stubs_archive (caml_mylib)) 
+         (ocamlopt_flags -runtime-variant _pic -output-obj -o caml_mylib.so))
+
+(executable (name Gen) 
+            (modules MyLibBindings Gen) 
+            (public_name stubgen.exe)
+            (libraries ctypes ctypes.foreign))
+
