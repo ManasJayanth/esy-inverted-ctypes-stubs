@@ -1,5 +1,5 @@
 {
-  "checksum": "72584a4b275f0b280633801ad535c0a8",
+  "checksum": "18602b35cac5dcfd880531baafad05f3",
   "root": "esy-inverted-ctypes-stubs@link-dev:./package.json",
   "node": {
     "yarn-pkg-config@github:esy-ocaml/yarn-pkg-config#cca65f99674ed2d954d28788edeb8c57fada5ed0@d41d8cd9": {
@@ -65,6 +65,7 @@
       "dependencies": [
         "refmterr@3.2.1@d41d8cd9", "ocaml@4.7.1004@d41d8cd9",
         "@opam/dune@opam:1.11.0@9ec4211e",
+        "@opam/ctypes-foreign@opam:0.4.0@72ef8de2",
         "@opam/ctypes@opam:0.15.0@341f2b0a",
         "@esy-ocaml/reason@3.5.0@d41d8cd9"
       ],
@@ -490,6 +491,25 @@
         "@opam/base-threads@opam:base@36803084"
       ]
     },
+    "@opam/ctypes-foreign@opam:0.4.0@72ef8de2": {
+      "id": "@opam/ctypes-foreign@opam:0.4.0@72ef8de2",
+      "name": "@opam/ctypes-foreign",
+      "version": "opam:0.4.0",
+      "source": {
+        "type": "install",
+        "source": [ "no-source:" ],
+        "opam": {
+          "name": "ctypes-foreign",
+          "version": "0.4.0",
+          "path": "esy.lock/opam/ctypes-foreign.0.4.0"
+        }
+      },
+      "overrides": [],
+      "dependencies": [
+        "ocaml@4.7.1004@d41d8cd9", "@esy-ocaml/substs@0.0.1@d41d8cd9"
+      ],
+      "devDependencies": [ "ocaml@4.7.1004@d41d8cd9" ]
+    },
     "@opam/ctypes@opam:0.15.0@341f2b0a": {
       "id": "@opam/ctypes@opam:0.15.0@341f2b0a",
       "name": "@opam/ctypes",
@@ -515,6 +535,7 @@
       "dependencies": [
         "ocaml@4.7.1004@d41d8cd9", "@opam/ocamlfind@opam:1.8.0@f744a0c5",
         "@opam/integers@opam:0.3.0@d6eefd3a",
+        "@opam/ctypes-foreign@opam:0.4.0@72ef8de2",
         "@opam/conf-pkg-config@opam:1.1@8c52f003",
         "@opam/base-bytes@opam:base@19d0c2ff",
         "@esy-ocaml/substs@0.0.1@d41d8cd9",

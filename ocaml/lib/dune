@@ -25,5 +25,5 @@
 (executable (name Gen) 
             (modules MyLibBindings Gen) 
             (public_name stubgen.exe)
-            (libraries ctypes ctypes.foreign))
+            (libraries ctypes ctypes.foreign ctypes.stubs))
 

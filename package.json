@@ -1,11 +1,16 @@
 {
-  "esy": { "build": "dune build -p #{self.name}" },
+  "esy": {
+    "build": "dune build -p #{self.name}"
+  },
   "dependencies": {
     "@esy-ocaml/reason": "*",
     "@opam/ctypes": "0.15.0",
+    "@opam/ctypes-foreign": "0.4.0",
     "@opam/dune": "*",
     "ocaml": "4.7.x",
     "refmterr": "*"
   },
-  "devDependencies": { "@opam/merlin": "*" }
+  "devDependencies": {
+    "@opam/merlin": "*"
+  }
 }

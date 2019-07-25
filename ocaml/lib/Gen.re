@@ -6,7 +6,7 @@
  */
 
 /** A driver for stub generation.  Build OCaml and C code from the
-    Bindings.Stubs functor. */;
+   Bindings.Stubs functor. */;
 
 let generate = () => {
   let dirname = Sys.getcwd();
@@ -15,7 +15,7 @@ let generate = () => {
   let ml_fd = open_out(path("mylib_generated_bindings.ml"));
   let c_fd = open_out(path("mylib.c"));
   let h_fd = open_out(path("mylib.h"));
-  let stubs: module Cstubs_inverted.BINDINGS = (module Bindings.Stubs);
+  let stubs: module Cstubs_inverted.BINDINGS = (module MyLibBindings.Stubs);
   {
     /* Generate the ML module that links in the generated C. */
     Cstubs_inverted.write_ml(
