@@ -1,5 +1,5 @@
 (rule (targets mylib.c mylib.h mylib_generated_bindings.ml) 
-      (deps ../stubgen/Gen.exe) 
+      (deps Gen.exe) 
       (action (run %{deps})))
 
 (rule (targets dllcaml_mylib_stubs.so) 
@@ -17,10 +17,11 @@
       (action (run %{cc} -I. -c %{c})))
 
 (library (name caml_mylib) 
-         (modules ApplyMyLibBindings) 
+         (flags (-w -27))
+         (modules ApplyMyLibBindings MyLibBindingsClone Mylib_generated_bindings) 
          (libraries ctypes ctypes.foreign) 
          (self_build_stubs_archive (caml_mylib)) 
-         (ocamlopt_flags -runtime-variant _pic -output-obj -o caml_mylib.so))
+         (ocamlopt_flags -runtime-variant _pic -o caml_mylib.so))
 
 (executable (name Gen) 
             (modules MyLibBindings Gen) 

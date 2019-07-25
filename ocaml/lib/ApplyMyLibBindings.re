@@ -1,1 +1,1 @@
-include Bindings.Stubs(Mylib_generated_bindings);
+include MyLibBindingsClone.Stubs(Mylib_generated_bindings);
