@@ -1,0 +1,5 @@
+(rule (targets test.exe) 
+      (deps test.c ../ocaml/lib/caml_mylib.so) 
+      (action (run %{cc} -I../ocaml/lib -I%{ocaml_where} -o %{targets} %{deps})))
+
+ 

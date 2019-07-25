@@ -10,21 +10,41 @@
       (deps mylib.o) 
       (action (run ar rcs %{targets} %{deps})))
 
+(rule (targets ctypes_path.txt)
+      (action (with-stdout-to %{targets} (run ocamlfind query ctypes))))
+
 (rule (targets mylib.o) 
       (deps 
        (:c mylib.c)
+       (:ctypes_path ctypes_path.txt)
        mylib.h) 
-      (action (run %{cc} -I. -c %{c})))
+      (action (run %{cc} -I. -I%{ocaml_where} -I%{read-lines:ctypes_path.txt} -c %{c})))
 
-(library (name caml_mylib) 
-         (flags (-w -27))
-         (modules ApplyMyLibBindings MyLibBindingsClone Mylib_generated_bindings) 
-         (libraries ctypes ctypes.foreign) 
-         (self_build_stubs_archive (caml_mylib)) 
-         (ocamlopt_flags -runtime-variant _pic -o caml_mylib.so))
+(rule (targets ApplyMyLibBindings.re.ml)
+      (deps (:src ApplyMyLibBindings.re) MyLibBindingsClone.cmx)
+      (action (with-stdout-to %{targets} (run refmt --print binary %{src}))))
+
+(rule (targets MyLibBindingsClone.re.ml)
+      (deps MyLibBindingsClone.re)
+      (action (with-stdout-to %{targets} (run refmt --print binary %{deps}))))
+
+(rule (targets MyLibBindingsClone.cmx)
+      (deps MyLibBindingsClone.re.ml)
+      (action (run ocamlfind ocamlopt -c MyLibBindings.re.ml -o %{targets} -linkpkg -package ctypes)))
+
+(rule (targets caml_mylib.so)
+      (deps caml_init.c MyLibBindingsClone.cmx mylib_generated_bindings.ml ApplyMyLibBindings.re.ml mylib.o)
+      (action (run ocamlfind opt -o %{targets} -linkpkg -runtime-variant _pic -output-obj -verbose -package ctypes,ctypes.foreign,ctypes.stubs %{deps})))
+                   
+
+;; (library (name caml_mylib) 
+;;          (flags (-w -27))
+;;          (modules ApplyMyLibBindings MyLibBindingsClone Mylib_generated_bindings) 
+;;          (libraries ctypes ctypes.foreign) 
+;;          (self_build_stubs_archive (caml_mylib)) 
+;;          (ocamlopt_flags -runtime-variant _pic -o caml_mylib.so))
 
 (executable (name Gen) 
             (modules MyLibBindings Gen) 
             (public_name stubgen.exe)
             (libraries ctypes ctypes.foreign ctypes.stubs))
-

@@ -1,2 +1,7 @@
 * Stubgen
   Needs an ml file that will create stubs. This file will use Ctypes to do so
+
+* Hacks
+  - MyLibBindings had to be cloned - MyLibBindingsClone. Same module must not be used in multiple stanzas?
+  - ctypes_cstubs_internals.h had to be written to builddir since it is in "" and gcc couldn't find it despite providing it with correct path
+

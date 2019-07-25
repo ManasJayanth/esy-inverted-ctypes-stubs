@@ -1,6 +1,12 @@
 {
   "esy": {
-    "build": "dune build ./ocaml/lib/caml_mylib.a"
+    "buildEnv": {
+      "DYLD_LIBRARY_PATH": "#{self.target_dir}/default/ocaml/lib"
+    },
+    "build": [
+      "dune build ./ocaml/lib/caml_mylib.so",
+      "dune build ./c/test.exe"
+    ]
   },
   "dependencies": {
     "@esy-ocaml/reason": "*",
