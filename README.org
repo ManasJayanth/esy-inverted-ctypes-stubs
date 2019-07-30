@@ -1,3 +1,8 @@
+
+* Instructions
+ 1. esy
+ 2. esy b dune exec ./c/test.exe
+
 * Stubgen
   Needs an ml file that will create stubs. This file will use Ctypes to do so
 
