@@ -1,6 +1,6 @@
 open Ctypes;
 
-let mylib_fn = () => 9999;
+let mylib_fn = () => 99997777;
 
 module Stubs = (I: Cstubs_inverted.INTERNAL) => {
   /* Structures declared here can be exposed to C too */
